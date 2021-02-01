@@ -26,7 +26,7 @@ $(document).ready(function(){
                  allowance = coupleAllowance25
                 break;
             }
-            let radioGroup2 = 0;
+            let radioGroup2 = 1;
         switch(radioGroup2) {
             case 0:
                 workAllowance = workAllowanceStandard;
@@ -35,17 +35,17 @@ $(document).ready(function(){
                 workAllowance = workAllowanceNoHousing;   
                 break;
         }
-        EldestChildEligible = true;
-        otherEligiblechildrenCount = 0;
+        EldestChildEligible = $('#eldestChildEligbile').prop("checked")
+        otherEligiblechildrenCount = parseInt($('#eligilbeChildrenCount').val());
         switch(EldestChildEligible) {
             case true:
-                childElement = childBeforeApril2017 + (otherEligiblechildrenCount * childElementDefault);
+                childElement = childBeforeApril2017 + ((otherEligiblechildrenCount - 1) * childElementDefault);
                 break;
             case false:
-                childElement = EliglbeChildCount * childElementDefault;
+                childElement = otherEligiblechildrenCount * childElementDefault;
             break;
         }
-        housingElement = 630;
+        housingElement = 0;
         
         wage = $('#wage1').val()
         wage2 = $('#wage2').val()
@@ -53,6 +53,6 @@ $(document).ready(function(){
         console.log("Housing: "+housingElement,"child: "+ childElement, "allowance: " +allowance, "take home: " + takehome)
         e.preventDefault()
         total = (allowance + housingElement + childElement) - ((takehome))
-        $("#total").val(total.toFixed(2));
+        $("#total").val('£' + total.toFixed(2) );
     });
 });
